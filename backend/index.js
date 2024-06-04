@@ -16,6 +16,10 @@ app.get('/',(req,res) => {
   res.send(`<title>ChatApp Backend</title>
   <h1>ChatApp Backend</h1>`)
 })
+app.get('/api/v1',(req,res) => {
+  res.send(`<title>ChatApp Backend</title>
+  <h1>ChatApp Backend Api</h1>`)
+})
 const dbConnet = require('./config/database');
 dbConnet()
 
