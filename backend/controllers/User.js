@@ -64,3 +64,20 @@ exports.login = async (req, res) => {
     })
   }
 }
+
+exports.getUsers = async(req,res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json({
+      success: true,
+      data:users,
+      message:"Fetching all users"
+    })
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).json({
+      success: false,
+      message:error.message,
+    })
+  }
+}
