@@ -6,8 +6,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Spinner } from "./Spinner";
 
-
-
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword,setShowPassword] = useState(false)
@@ -19,7 +17,8 @@ const Login = () => {
     setLoading(true)
     axios.post(`${import.meta.env.VITE_API_URL}/login`,{email,password})
     .then((response) => {
-      console.log(response.data)
+      let token = response.data.data.token
+      localStorage.setItem('chat-app-token',token)
       navigate('/')
       setLoading(false)
     })

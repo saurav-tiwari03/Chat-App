@@ -25,11 +25,11 @@ exports.signup = async (req, res) => {
     const user = await User.create({username,email,password:hashPassword});
     console.log(`User created with username ${username}`)
 
-    const payLoad = [
-      id = user._id,
-      username = user.username,
-      email = user.email
-    ]
+    const payLoad = {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    };
 
     const token = jwt.sign({payLoad},process.env.SECRET,{expiresIn:'3d'})
 
@@ -54,18 +54,18 @@ exports.login = async (req, res) => {
       throw new Error('Enter all fields')
     }
     const user = await User.findOne({email});
-    
-    const payLoad = [
-      id = user._id,
-      username = user.username,
-      email = user.email
-    ]
+
+    const payLoad = {
+      id: user._id,
+      username: user.username,
+      email: user.email
+    };
 
     const token = jwt.sign({payLoad},process.env.SECRET,{expiresIn:'3d'})
     
     res.status(200).json({
       success: true,
-      data:{username,email,token},
+      data:{email,token},
       message:'Logged in successfully'
     })
       
