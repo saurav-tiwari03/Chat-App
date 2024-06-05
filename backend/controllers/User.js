@@ -54,10 +54,7 @@ exports.login = async (req, res) => {
       throw new Error('Enter all fields')
     }
     const user = await User.findOne({email});
-    const userData = {
-      username: user.username,
-      email: user.email
-    }
+    
     const payLoad = [
       id = user._id,
       username = user.username,
