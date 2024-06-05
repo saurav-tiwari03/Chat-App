@@ -19,6 +19,7 @@ const Login = () => {
     .then((response) => {
       let token = response.data.data.token
       localStorage.setItem('chat-app-token',token)
+      toast.success('Login successful Please Reload')
       navigate('/')
       setLoading(false)
     })
@@ -31,7 +32,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen font-[sans-serif] text-[#333] p-4">
       <div className="max-w-md w-full mx-auto">
-        <div className="bg-opacity-70 bg-white rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
+        <form className="bg-opacity-70 bg-white rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
           <div className="mb-10">
             <h3 className="text-3xl font-extrabold">Log in</h3>
           </div>
@@ -60,7 +61,7 @@ const Login = () => {
             <p className="text-sm text-center mt-6">Dont have an account <Link to='/signup'
               className="font-semibold hover:underline ml-1 whitespace-nowrap">Signup here</Link></p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
