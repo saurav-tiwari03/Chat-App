@@ -6,7 +6,7 @@ export const Text = () => {
   const [chats, setChats] = useState({});
 
   const getChatHandler = () => {
-    axios.get(`http://localhost:4000/api/v1/chats`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/chats`, {
       params: { chatId }
     })
     .then((response) => {

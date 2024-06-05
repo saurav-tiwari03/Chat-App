@@ -15,7 +15,7 @@ export const Conversation = ({ name }) => {
   const sendMessageHandler = () => {
     console.log(message);
     setLoading(true);
-    axios.post('http://localhost:4000/api/v1/chats/add', { chatId, message, username })
+    axios.post(`${import.meta.env.VITE_API_URL}/chats/add`, { chatId, message, username })
       .then((response) => {
         console.log(response);
         toast.success('Message sent successfully');

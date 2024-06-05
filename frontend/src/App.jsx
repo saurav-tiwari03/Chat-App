@@ -34,7 +34,7 @@ export default function App() {
         <Route path='/' element={authStatus ? <Home data={data}/> : <Navigate to='/login' />}/>
         <Route path='/login' element={authStatus ? <Navigate to='/' /> : <LogIn />}/>
         <Route path='/signup' element={authStatus ? <Navigate to='/' /> : <SignUp />}/>
-        <Route path="/chat" element={<Chatpage />}/>
+        <Route path="/chat" element={<Chatpage data={data} />}/>
       </Routes>
       <Toaster />
     </div>
