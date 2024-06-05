@@ -3,6 +3,9 @@ import { Link,useNavigate } from "react-router-dom";
 import { MdMailOutline } from "react-icons/md";
 import { FaRegEye,FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegUserCircle } from "react-icons/fa";
+import axios from 'axios'
+import toast from "react-hot-toast";
+import { Spinner } from "./Spinner";
 
 
 const Login = () => {
@@ -11,10 +14,21 @@ const Login = () => {
   const [username,setUsername] = useState('');
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const [loading,setLoading] = useState(false);
 
   const signupHandler = () => {
-    console.log({username: username, email: email, password: password})
-    navigate('/')
+    setLoading(true);
+    axios.post(`${import.meta.env.VITE_API_URL}/signup`,{username: username, email: email, password: password})
+    .then((response) => {
+      console.log(response);
+      navigate('/')
+      setLoading(true)
+    })
+    .catch((error) => {
+      console.log(error);
+      toast.error(error.message);
+      setLoading(false)
+    })
   }
 
   return (
@@ -51,8 +65,8 @@ const Login = () => {
           <div className="mt-10">
             <button type="button"
             onClick={signupHandler}
-              className="w-full py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-[#333] hover:bg-[#222] focus:outline-none">
-              Sign up
+              className="py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-[#333] hover:bg-[#222] focus:outline-none">
+              {loading ?  <Spinner /> : 'Sign up'}
             </button>
             <p className="text-sm text-center mt-6">Already have an account <Link to='/login'
               className="font-semibold hover:underline ml-1 whitespace-nowrap">Login here</Link></p>

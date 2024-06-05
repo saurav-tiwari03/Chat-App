@@ -1,52 +1,18 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { ImSpinner } from "react-icons/im";
-
+import { ChatBox } from '../components/ChatBox';
+import { PastChats } from '../components/PastChats';
 
 export const Home = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const dataHandler = () => {
-    setLoading(true);
-    axios.get(`${import.meta.env.VITE_API_URL}/users`)
-      .then((response) => {
-        setUsers(response.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <p className='text-5xl '>This Home Page</p>
-      <button onClick={dataHandler} className='bg-indigo-500 text-white rounded p-4'>Get Users Data</button>
-      <div className='flex items-center justify-center mt-4'>
-        {
-          loading ? 
-          <Loader /> :
-          (
-            users.map((user) => (
-              <p key={user._id}>{user.username}</p>
-            ))
-          )
-        }
+      <p className='text-3xl md:text-5xl font-Poppins my-2 font-semibold'>Web Chat App</p>
+      <div>
+        <ChatBox />
+      </div>
+      <div>
+        <PastChats />
       </div>
     </div>
   )
 }
 
-const Loader = () => {
-  return (
-    <div className="bg-indigo-500 flex text-white rounded p-2 items-center gap-1" >
-      <p className="animate-spin " >
-        <ImSpinner/>
-      </p>
-      <p>
-        Processing...
-      </p>
-    </div>
-  )
-}

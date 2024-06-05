@@ -24,9 +24,18 @@ exports.signup = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
     const user = await User.create({username,email,password:hashPassword});
     console.log(`User created with username ${username}`)
+
+    const payLoad = [
+      id = user._id,
+      username = user.username,
+      email = user.email
+    ]
+
+    const token = jwt.sign({payLoad},process.env.SECRET,{expiresIn:'3d'})
+
     res.status(200).json({
       success: true,
-      data:user,
+      data:{username,email,token},
       message:'User created successfully'
     })
   } catch (error) {
@@ -49,10 +58,17 @@ exports.login = async (req, res) => {
       username: user.username,
       email: user.email
     }
+    const payLoad = [
+      id = user._id,
+      username = user.username,
+      email = user.email
+    ]
+
+    const token = jwt.sign({payLoad},process.env.SECRET,{expiresIn:'3d'})
     
     res.status(200).json({
       success: true,
-      data:userData,
+      data:{username,email,token},
       message:'Logged in successfully'
     })
       
