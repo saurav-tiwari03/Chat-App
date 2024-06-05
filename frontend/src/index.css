@@ -6,4 +6,5 @@
 
 body {
   background-color: #e7cfad;
+  user-select: none;
 }

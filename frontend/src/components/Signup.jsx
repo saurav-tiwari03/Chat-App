@@ -18,7 +18,7 @@ const Login = () => {
 
   const signupHandler = () => {
     setLoading(true);
-    axios.post(`${import.meta.env.VITE_API_URL}/signup`,{username: username, email: email, password: password})
+    axios.post(`http://localhost:4000/api/v1/signup`,{username: username, email: email, password: password})
     .then((response) => {
       console.log(response);
       navigate('/')

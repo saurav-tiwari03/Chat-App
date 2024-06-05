@@ -8,13 +8,14 @@ import {jwtDecode} from 'jwt-decode';
 
 export default function App() {
   const [authStatus,setAuthStatus] = useState(false);
+  const [data,setData] = useState();
   useEffect(() => {
     const authStatusHandler = () => {
       const token = localStorage.getItem('chat-app-token');
       if (token) {
         try {
           const decoded = jwtDecode(token);
-          console.log(decoded);
+          setData(decoded.payLoad);
           setAuthStatus(true);
         } catch (error) {
           console.log(error);
@@ -30,7 +31,7 @@ export default function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={authStatus ? <Home /> : <Navigate to='/login' />}/>
+        <Route path='/' element={authStatus ? <Home data={data}/> : <Navigate to='/login' />}/>
         <Route path='/login' element={authStatus ? <Navigate to='/' /> : <LogIn />}/>
         <Route path='/signup' element={authStatus ? <Navigate to='/' /> : <SignUp />}/>
         <Route path="/chat" element={<Chatpage />}/>

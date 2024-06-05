@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 export const Chatpage = () => {
   const location = useLocation();
   const { chatId } = location.state || {}; 
-  console.log(chatId); 
   return (
     <div className="flex items-center justify-center h-[90vh]">
       <Conversation name={chatId}/> 
