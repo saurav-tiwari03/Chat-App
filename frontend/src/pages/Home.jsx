@@ -21,7 +21,7 @@ export const Home = () => {
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      <p className='flex'>This Home Page</p>
+      <p className='text-5xl '>This Home Page</p>
       <button onClick={dataHandler} className='bg-indigo-500 text-white rounded p-4'>Get Users Data</button>
       <div className='flex items-center justify-center mt-4'>
         {
